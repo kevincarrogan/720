@@ -4,13 +4,28 @@ var Clock = function (two, hour, minute) {
     this.minute = minute;
 };
 
+Clock.prototype.getMinuteHandPos = function () {
+    var minuteRatio =  ((2 * Math.PI) / 60) * this.minute;
+    var multiplierX = Math.sin(minuteRatio);
+    var multiplierY = Math.cos(minuteRatio);
+
+    return {
+        x: (multiplierX * 150 + 250),
+        y: (multiplierY * -150 + 250)
+    };
+};
+
 Clock.prototype.render = function () {
     var outer = this.two.makeCircle(250, 250, 200);
 
     var inner = this.two.makeCircle(250, 250, 180);
     inner.fill = '#1f1f1f';
 
-    var minuteHand = this.two.makeLine(250, 250, 250, 100);
+    var minuteHandDimensions = this.getMinuteHandPos();
+    var minuteHand = this.two.makeLine(
+        250, 250,
+        minuteHandDimensions.x, minuteHandDimensions.y
+    );
     minuteHand.stroke = '#fff';
     minuteHand.linewidth = 10;
     minuteHand.cap = 'round';
@@ -29,7 +44,7 @@ var Scene = function (el) {
         width: 500
     });
 
-    this.clock = new Clock(this.two, 10, 20);
+    this.clock = new Clock(this.two, 10, 10);
 };
 
 Scene.prototype.render = function () {
