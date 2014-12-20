@@ -30,28 +30,25 @@ Clock.prototype.getHourHandPos = function () {
     };
 };
 
+Clock.prototype.renderHand = function (posFunc) {
+    var handDimensions = posFunc();
+    var hand = this.two.makeLine(
+        250, 250,
+        handDimensions.x, handDimensions.y
+    );
+    hand.stroke = '#fff';
+    hand.linewidth = 10;
+    hand.cap = 'round';
+};
+
 Clock.prototype.render = function () {
     var outer = this.two.makeCircle(250, 250, 200);
 
     var inner = this.two.makeCircle(250, 250, 180);
     inner.fill = '#1f1f1f';
 
-    var minuteHandDimensions = this.getMinuteHandPos();
-    var minuteHand = this.two.makeLine(
-        250, 250,
-        minuteHandDimensions.x, minuteHandDimensions.y
-    );
-    minuteHand.stroke = '#fff';
-    minuteHand.linewidth = 10;
-    minuteHand.cap = 'round';
-
-    var hourHandDimensions = this.getHourHandPos();
-    var hourHand = this.two.makeLine(
-        250, 250,
-        hourHandDimensions.x, hourHandDimensions.y);
-    hourHand.stroke = '#fff';
-    hourHand.linewidth = 10;
-    hourHand.cap = 'round';
+    this.renderHand(this.getMinuteHandPos.bind(this));
+    this.renderHand(this.getHourHandPos.bind(this));
 };
 
 var Scene = function (el) {
