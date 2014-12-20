@@ -57,11 +57,16 @@ var Scene = function (el) {
     this.el = el;
 
     this.two = new Two({
-        height: 500,
-        width: 500
+        height: 700,
+        width: 1200
     });
 
-    this.clock = new Clock(this.two, 0, 0, 10, 10);
+    this.clocks = [];
+    for (var hour = 0; hour < 24; hour++) {
+        for (var minute = 0; minute < 60; minute++) {
+            this.clocks.push(new Clock(this.two, minute, hour, hour, minute));
+        }
+    }
 
     window.two = this.two;
 };
@@ -69,7 +74,9 @@ var Scene = function (el) {
 Scene.prototype.render = function () {
     this.two.appendTo(this.el);
 
-    this.clock.render();
+    for (var i = 0; i < this.clocks.length; i++) {
+        this.clocks[i].render();
+    }
 
     this.two.update();
 };
