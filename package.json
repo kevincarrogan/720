@@ -1,0 +1,10 @@
+{
+  "name": "720",
+  "description": "A visualisation of time",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "two.js": "~0.4.0"
+  },
+  "devDependencies": {}
+}
