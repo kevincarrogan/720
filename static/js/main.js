@@ -4,8 +4,12 @@ var Clock = function (two, hour, minute) {
     this.minute = minute;
 };
 
+Clock.prototype.getRatio = function (intervals, val) {
+    return ((2 * Math.PI) / intervals) * val;
+};
+
 Clock.prototype.getMinuteHandPos = function () {
-    var minuteRatio =  ((2 * Math.PI) / 60) * this.minute;
+    var minuteRatio = this.getRatio(60, this.minute);
     var multiplierX = Math.sin(minuteRatio);
     var multiplierY = Math.cos(minuteRatio);
 
@@ -16,7 +20,7 @@ Clock.prototype.getMinuteHandPos = function () {
 };
 
 Clock.prototype.getHourHandPos = function () {
-    var hourRatio = ((2 * Math.PI) / 12) * this.hour;
+    var hourRatio = this.getRatio(12, this.hour);
     var multiplierX = Math.sin(hourRatio);
     var multiplierY = Math.cos(hourRatio);
 
