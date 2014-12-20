@@ -15,6 +15,17 @@ Clock.prototype.getMinuteHandPos = function () {
     };
 };
 
+Clock.prototype.getHourHandPos = function () {
+    var hourRatio = ((2 * Math.PI) / 12) * this.hour;
+    var multiplierX = Math.sin(hourRatio);
+    var multiplierY = Math.cos(hourRatio);
+
+    return {
+        x: (multiplierX * 100 + 250),
+        y: (multiplierY * -100 + 250)
+    };
+};
+
 Clock.prototype.render = function () {
     var outer = this.two.makeCircle(250, 250, 200);
 
@@ -30,7 +41,10 @@ Clock.prototype.render = function () {
     minuteHand.linewidth = 10;
     minuteHand.cap = 'round';
 
-    var hourHand = this.two.makeLine(250, 250, 150, 250);
+    var hourHandDimensions = this.getHourHandPos();
+    var hourHand = this.two.makeLine(
+        250, 250,
+        hourHandDimensions.x, hourHandDimensions.y);
     hourHand.stroke = '#fff';
     hourHand.linewidth = 10;
     hourHand.cap = 'round';
