@@ -24,7 +24,8 @@ Clock.prototype.getMinuteHandPos = function () {
 };
 
 Clock.prototype.getHourHandPos = function () {
-    var hourRatio = this.getRatio(12, this.hour);
+    var hour = this.hour + (this.minute / 60);
+    var hourRatio = this.getRatio(12, hour);
     var multiplierX = Math.sin(hourRatio);
     var multiplierY = Math.cos(hourRatio);
 
