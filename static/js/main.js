@@ -49,14 +49,20 @@ Clock.prototype.renderHand = function (posFunc) {
 };
 
 Clock.prototype.renderPips = function () {
-    var pip = this.two.makeLine(
-        this.x, this.y - 120,
-        this.x, this.y - 115
-    );
-    pip.stroke = '#fff';
-    pip.linewidth = 10;
-    pip.cap = 'round';
-    this.group.add(pip);
+    for (var i = 0; i < 12; i++) {
+        var hourRatio = this.getRatio(12, i);
+        var multiplierX = Math.sin(hourRatio);
+        var multiplierY = Math.cos(hourRatio);
+
+        var pip = this.two.makeLine(
+            this.x - 120 * multiplierX, this.y - 120 * multiplierY,
+            this.x - 115 * multiplierX, this.y - 115 * multiplierY
+        );
+        pip.stroke = '#fff';
+        pip.linewidth = 10;
+        pip.cap = 'round';
+        this.group.add(pip);
+    }
 };
 
 Clock.prototype.unsetCurrent = function () {
