@@ -78,8 +78,8 @@ var Scene = function (el) {
     this.el = el;
 
     this.two = new Two({
-        height: 700,
-        width: 1200
+        height: el.clientHeight,
+        width: el.clientWidth
     });
 
     this.timeMap = {};
