@@ -4,6 +4,8 @@ var Clock = function (two, x, y, hour, minute) {
     this.two = two;
     this.hour = hour;
     this.minute = minute;
+
+    this.group = two.makeGroup();
 };
 
 Clock.prototype.getRatio = function (intervals, val) {
@@ -41,16 +43,29 @@ Clock.prototype.renderHand = function (posFunc) {
     hand.stroke = '#fff';
     hand.linewidth = 10;
     hand.cap = 'round';
+
+    return hand;
+};
+
+Clock.prototype.setCurrent = function () {
+    this.group.opacity = 1;
 };
 
 Clock.prototype.render = function () {
     var outer = this.two.makeCircle(this.x, this.y, 200);
+    this.group.add(outer);
 
     var inner = this.two.makeCircle(this.x, this.y, 180);
+    this.group.add(inner);
     inner.fill = '#1f1f1f';
 
-    this.renderHand(this.getMinuteHandPos.bind(this));
-    this.renderHand(this.getHourHandPos.bind(this));
+    var minuteHand = this.renderHand(this.getMinuteHandPos.bind(this));
+    this.group.add(minuteHand);
+
+    var hourHand = this.renderHand(this.getHourHandPos.bind(this));
+    this.group.add(hourHand);
+
+    this.group.opacity = 0.2;
 };
 
 var Scene = function (el) {
@@ -75,6 +90,8 @@ Scene.prototype.centerOnClock = function (clock) {
 
     this.two.scene.translation.x = centerX - clock.x;
     this.two.scene.translation.y = centerY - clock.y;
+
+    clock.setCurrent();
 
     this.two.update();
 };
