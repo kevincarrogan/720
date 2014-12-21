@@ -68,8 +68,6 @@ var Scene = function (el) {
             this.clocks.push(new Clock(this.two, minute, hour, hour, minute));
         }
     }
-
-    window.two = this.two;
 };
 
 Scene.prototype.render = function () {
