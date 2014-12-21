@@ -1,6 +1,6 @@
 var Clock = function (two, x, y, hour, minute) {
-    this.x = x * 350 + 250;
-    this.y = y * 350 + 250;
+    this.x = x * 350;
+    this.y = y * 350;
     this.two = two;
     this.hour = hour;
     this.minute = minute;
