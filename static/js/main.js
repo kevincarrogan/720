@@ -48,6 +48,17 @@ Clock.prototype.renderHand = function (posFunc) {
     return hand;
 };
 
+Clock.prototype.renderPips = function () {
+    var pip = this.two.makeLine(
+        this.x, this.y - 120,
+        this.x, this.y - 115
+    );
+    pip.stroke = '#fff';
+    pip.linewidth = 10;
+    pip.cap = 'round';
+    this.group.add(pip);
+};
+
 Clock.prototype.unsetCurrent = function () {
     new TWEEN.Tween(this.group).to({opacity: 0.2}, 500).start();
 };
@@ -69,6 +80,8 @@ Clock.prototype.render = function () {
 
     var hourHand = this.renderHand(this.getHourHandPos.bind(this));
     this.group.add(hourHand);
+
+    this.renderPips();
 
     this.group.opacity = 0.2;
 };
