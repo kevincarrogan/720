@@ -57,6 +57,7 @@ var Scene = function (el) {
     this.el = el;
 
     this.two = new Two({
+        type: Two.Types.canvas,
         height: 700,
         width: 1200
     });
