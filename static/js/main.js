@@ -90,11 +90,10 @@ var Scene = function (el) {
             var clock = new Clock(this.two, minute, hour, hour, minute)
             this.clocks.push(clock);
             this.timeMap[hour + ':' + minute] = clock;
-            if (currentDate.getHours() === hour && currentDate.getMinutes() === minute) {
-                this.currentClock = clock;
-            }
         }
     }
+
+    this.updateTime();
 
     setInterval(this.updateTime.bind(this), 500);
 };
@@ -106,7 +105,9 @@ Scene.prototype.centerOnClock = function (clock) {
     this.two.scene.translation.x = centerX - clock.x;
     this.two.scene.translation.y = centerY - clock.y;
 
-    this.currentClock.unsetCurrent();
+    if (this.currentClock) {
+        this.currentClock.unsetCurrent();
+    }
 
     clock.setCurrent();
     this.currentClock = clock;
