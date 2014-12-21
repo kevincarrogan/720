@@ -1,6 +1,6 @@
 var Clock = function (two, x, y, hour, minute) {
-    this.x = x * 500 + 250;
-    this.y = y * 500 + 250;
+    this.x = x * 350 + 250;
+    this.y = y * 350 + 250;
     this.two = two;
     this.hour = hour;
     this.minute = minute;
@@ -18,8 +18,8 @@ Clock.prototype.getMinuteHandPos = function () {
     var multiplierY = Math.cos(minuteRatio);
 
     return {
-        x: (multiplierX * 150 + this.x),
-        y: (multiplierY * -150 + this.y)
+        x: (multiplierX * 100 + this.x),
+        y: (multiplierY * -100 + this.y)
     };
 };
 
@@ -29,8 +29,8 @@ Clock.prototype.getHourHandPos = function () {
     var multiplierY = Math.cos(hourRatio);
 
     return {
-        x: (multiplierX * 100 + this.x),
-        y: (multiplierY * -100 + this.y)
+        x: (multiplierX * 70 + this.x),
+        y: (multiplierY * -70 + this.y)
     };
 };
 
@@ -56,10 +56,10 @@ Clock.prototype.setCurrent = function () {
 };
 
 Clock.prototype.render = function () {
-    var outer = this.two.makeCircle(this.x, this.y, 200);
+    var outer = this.two.makeCircle(this.x, this.y, 150);
     this.group.add(outer);
 
-    var inner = this.two.makeCircle(this.x, this.y, 180);
+    var inner = this.two.makeCircle(this.x, this.y, 130);
     this.group.add(inner);
     inner.fill = '#1f1f1f';
 
