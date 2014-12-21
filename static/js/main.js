@@ -57,7 +57,6 @@ var Scene = function (el) {
     this.el = el;
 
     this.two = new Two({
-        type: Two.Types.canvas,
         height: 700,
         width: 1200
     });
@@ -70,12 +69,24 @@ var Scene = function (el) {
     }
 };
 
+Scene.prototype.centerOnClock = function (clock) {
+    var centerX = this.two.width / 2;
+    var centerY = this.two.height / 2;
+
+    this.two.scene.translation.x = centerX - clock.x;
+    this.two.scene.translation.y = centerY - clock.y;
+
+    this.two.update();
+};
+
 Scene.prototype.render = function () {
     this.two.appendTo(this.el);
 
     for (var i = 0; i < this.clocks.length; i++) {
         this.clocks[i].render();
     }
+
+    this.centerOnClock(this.clocks[0]);
 
     this.two.update();
 };
