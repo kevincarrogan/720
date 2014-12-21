@@ -127,12 +127,13 @@ Scene.prototype.centerOnClock = function (clock) {
         this.currentClock.unsetCurrent();
     }
 
+    clock.setCurrent();
+
     new TWEEN.Tween(scene.translation)
             .easing(TWEEN.Easing.Elastic.Out)
             .to({x: centerX - clock.x, y: centerY - clock.y}, 1000)
             .start();
 
-    clock.setCurrent();
     this.currentClock = clock;
 };
 
