@@ -101,26 +101,33 @@ var Scene = function (el) {
 Scene.prototype.centerOnClock = function (clock) {
     var centerX = this.two.width / 2;
     var centerY = this.two.height / 2;
-
-    this.two.scene.translation.x = centerX - clock.x;
-    this.two.scene.translation.y = centerY - clock.y;
+    var scene = this.two.scene;
 
     if (this.currentClock) {
         this.currentClock.unsetCurrent();
     }
 
+    var tween = new TWEEN.Tween(scene.translation)
+                        .to({x: centerX - clock.x, y: centerY - clock.y}, 150)
+                        .start();
+
     clock.setCurrent();
     this.currentClock = clock;
-
-    this.two.update();
 };
 
 Scene.prototype.updateTime = function () {
     var currentDate = new Date();
-    var clock = this.timeMap[(currentDate.getHours() % 12) + ':' + currentDate.getMinutes()];
-
-    this.centerOnClock(clock);
+    
+    this.setTime((currentDate.getHours() % 12), currentDate.getMinutes());
 };
+
+Scene.prototype.setTime = function (hour, minutes) {
+    var clock = this.timeMap[hour + ':' + minutes];
+
+    if (clock !== this.currentClock) {
+        this.centerOnClock(clock);
+    }
+}
 
 Scene.prototype.render = function () {
     this.two.appendTo(this.el);
@@ -129,7 +136,5 @@ Scene.prototype.render = function () {
         this.clocks[i].render();
     }
 
-    this.centerOnClock(this.currentClock);
-
-    this.two.update();
+    this.two.bind('update', function () { TWEEN.update(); }).play();
 };
