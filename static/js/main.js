@@ -69,6 +69,8 @@ Clock.prototype.render = function () {
 };
 
 var Scene = function (el) {
+    var currentDate = new Date();
+
     this.el = el;
 
     this.two = new Two({
@@ -79,7 +81,11 @@ var Scene = function (el) {
     this.clocks = [];
     for (var hour = 0; hour < 12; hour++) {
         for (var minute = 0; minute < 60; minute++) {
-            this.clocks.push(new Clock(this.two, minute, hour, hour, minute));
+            var clock = new Clock(this.two, minute, hour, hour, minute)
+            this.clocks.push(clock);
+            if (currentDate.getHours() === hour && currentDate.getMinutes() === minute) {
+                this.currentClock = clock;
+            }
         }
     }
 };
@@ -103,7 +109,7 @@ Scene.prototype.render = function () {
         this.clocks[i].render();
     }
 
-    this.centerOnClock(this.clocks[0]);
+    this.centerOnClock(this.currentClock);
 
     this.two.update();
 };
