@@ -47,6 +47,10 @@ Clock.prototype.renderHand = function (posFunc) {
     return hand;
 };
 
+Clock.prototype.unsetCurrent = function () {
+    this.group.opacity = 0.2;
+};
+
 Clock.prototype.setCurrent = function () {
     this.group.opacity = 1;
 };
@@ -78,16 +82,21 @@ var Scene = function (el) {
         width: 1200
     });
 
+    this.timeMap = {};
+
     this.clocks = [];
     for (var hour = 0; hour < 12; hour++) {
         for (var minute = 0; minute < 60; minute++) {
             var clock = new Clock(this.two, minute, hour, hour, minute)
             this.clocks.push(clock);
+            this.timeMap[hour + ':' + minute] = clock;
             if (currentDate.getHours() === hour && currentDate.getMinutes() === minute) {
                 this.currentClock = clock;
             }
         }
     }
+
+    setInterval(this.updateTime.bind(this), 60000);
 };
 
 Scene.prototype.centerOnClock = function (clock) {
@@ -97,9 +106,19 @@ Scene.prototype.centerOnClock = function (clock) {
     this.two.scene.translation.x = centerX - clock.x;
     this.two.scene.translation.y = centerY - clock.y;
 
+    this.currentClock.unsetCurrent();
+
     clock.setCurrent();
+    this.currentClock = clock;
 
     this.two.update();
+};
+
+Scene.prototype.updateTime = function () {
+    var currentDate = new Date();
+    var clock = this.timeMap[currentDate.getHours() + ':' + currentDate.getMinutes()];
+
+    this.centerOnClock(clock);
 };
 
 Scene.prototype.render = function () {
