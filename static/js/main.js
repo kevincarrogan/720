@@ -48,11 +48,11 @@ Clock.prototype.renderHand = function (posFunc) {
 };
 
 Clock.prototype.unsetCurrent = function () {
-    this.group.opacity = 0.2;
+    new TWEEN.Tween(this.group).to({opacity: 0.2}, 500).start();
 };
 
 Clock.prototype.setCurrent = function () {
-    this.group.opacity = 1;
+    new TWEEN.Tween(this.group).to({opacity: 1}, 500).start();
 };
 
 Clock.prototype.render = function () {
@@ -107,9 +107,9 @@ Scene.prototype.centerOnClock = function (clock) {
         this.currentClock.unsetCurrent();
     }
 
-    var tween = new TWEEN.Tween(scene.translation)
-                        .to({x: centerX - clock.x, y: centerY - clock.y}, 150)
-                        .start();
+    new TWEEN.Tween(scene.translation)
+            .to({x: centerX - clock.x, y: centerY - clock.y}, 500)
+            .start();
 
     clock.setCurrent();
     this.currentClock = clock;
