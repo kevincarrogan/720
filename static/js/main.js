@@ -151,6 +151,8 @@ Scene.prototype.setTime = function (hour, minutes) {
 }
 
 Scene.prototype.render = function () {
+    var self = this;
+
     this.two.appendTo(this.el);
 
     for (var i = 0; i < this.clocks.length; i++) {
@@ -158,4 +160,14 @@ Scene.prototype.render = function () {
     }
 
     this.two.bind('update', function () { TWEEN.update(); }).play();
+
+    var resize = _.debounce(function () {
+        self.two.height = self.el.clientHeight;
+        self.two.width = self.el.clientWidth;
+        if (self.currentClock) {
+            self.centerOnClock(self.currentClock);
+        }
+    }, 100);
+
+    window.addEventListener('resize', resize);
 };
