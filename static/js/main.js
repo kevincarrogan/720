@@ -12,27 +12,25 @@ Clock.prototype.getRatio = function (intervals, val) {
     return ((2 * Math.PI) / intervals) * val;
 };
 
-Clock.prototype.getMinuteHandPos = function () {
-    var minuteRatio = this.getRatio(60, this.minute);
-    var multiplierX = Math.sin(minuteRatio);
-    var multiplierY = Math.cos(minuteRatio);
+Clock.prototype.getHandPos = function (intervals, val, length) {
+    var ratio = this.getRatio(intervals, val);
+    var multiplierX = Math.sin(ratio);
+    var multiplierY = Math.cos(ratio);
 
     return {
-        x: (multiplierX * 100 + this.x),
-        y: (multiplierY * -100 + this.y)
+        x: (multiplierX * length + this.x),
+        y: (multiplierY * -length + this.y)
     };
+};
+
+Clock.prototype.getMinuteHandPos = function () {
+    return this.getHandPos(60, this.minute, 100);
 };
 
 Clock.prototype.getHourHandPos = function () {
     var hour = this.hour + (this.minute / 60);
-    var hourRatio = this.getRatio(12, hour);
-    var multiplierX = Math.sin(hourRatio);
-    var multiplierY = Math.cos(hourRatio);
 
-    return {
-        x: (multiplierX * 70 + this.x),
-        y: (multiplierY * -70 + this.y)
-    };
+    return this.getHandPos(12, hour, 70);
 };
 
 Clock.prototype.renderHand = function (posFunc) {
