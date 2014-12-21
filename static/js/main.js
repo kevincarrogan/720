@@ -89,7 +89,7 @@ var Scene = function (el) {
         for (var minute = 0; minute < 60; minute++) {
             var clock = new Clock(this.two, minute, hour, hour, minute)
             this.clocks.push(clock);
-            this.timeMap[hour + ':' + minute] = clock;
+            this.timeMap[(hour % 12) + ':' + minute] = clock;
         }
     }
 
@@ -117,7 +117,7 @@ Scene.prototype.centerOnClock = function (clock) {
 
 Scene.prototype.updateTime = function () {
     var currentDate = new Date();
-    var clock = this.timeMap[currentDate.getHours() + ':' + currentDate.getMinutes()];
+    var clock = this.timeMap[(currentDate.getHours() % 12) + ':' + currentDate.getMinutes()];
 
     this.centerOnClock(clock);
 };
