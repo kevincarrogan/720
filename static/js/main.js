@@ -96,7 +96,7 @@ var Scene = function (el) {
         }
     }
 
-    setInterval(this.updateTime.bind(this), 60000);
+    setInterval(this.updateTime.bind(this), 500);
 };
 
 Scene.prototype.centerOnClock = function (clock) {
