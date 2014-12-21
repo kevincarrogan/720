@@ -63,7 +63,7 @@ var Scene = function (el) {
     });
 
     this.clocks = [];
-    for (var hour = 0; hour < 24; hour++) {
+    for (var hour = 0; hour < 12; hour++) {
         for (var minute = 0; minute < 60; minute++) {
             this.clocks.push(new Clock(this.two, minute, hour, hour, minute));
         }
