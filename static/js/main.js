@@ -53,8 +53,8 @@ Clock.prototype.renderPips = function () {
         var multiplierY = Math.cos(hourRatio);
 
         var pip = this.two.makeLine(
-            this.x - 120 * multiplierX, this.y - 120 * multiplierY,
-            this.x - 115 * multiplierX, this.y - 115 * multiplierY
+            this.x - 130 * multiplierX, this.y - 130 * multiplierY,
+            this.x - 120 * multiplierX, this.y - 120 * multiplierY
         );
         pip.stroke = '#fff';
         pip.linewidth = 10;
@@ -75,7 +75,7 @@ Clock.prototype.render = function () {
     var outer = this.two.makeCircle(this.x, this.y, 150);
     this.group.add(outer);
 
-    var inner = this.two.makeCircle(this.x, this.y, 130);
+    var inner = this.two.makeCircle(this.x, this.y, 140);
     this.group.add(inner);
     inner.fill = '#1f1f1f';
 
