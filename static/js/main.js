@@ -1,6 +1,6 @@
 var Clock = function (two, x, y, hour, minute) {
-    this.x = x * 250;
-    this.y = y * 250;
+    this.x = x * 165;
+    this.y = y * 165;
     this.two = two;
     this.hour = hour;
     this.minute = minute;
@@ -24,13 +24,13 @@ Clock.prototype.getHandPos = function (intervals, val, length) {
 };
 
 Clock.prototype.getMinuteHandPos = function () {
-    return this.getHandPos(60, this.minute, 100);
+    return this.getHandPos(60, this.minute, 65);
 };
 
 Clock.prototype.getHourHandPos = function () {
     var hour = this.hour + (this.minute / 60);
 
-    return this.getHandPos(12, hour, 70);
+    return this.getHandPos(12, hour, 40);
 };
 
 Clock.prototype.renderHand = function (posFunc) {
@@ -40,7 +40,7 @@ Clock.prototype.renderHand = function (posFunc) {
         handDimensions.x, handDimensions.y
     );
     hand.stroke = '#fff';
-    hand.linewidth = 10;
+    hand.linewidth = 5;
     hand.cap = 'round';
 
     return hand;
@@ -53,11 +53,11 @@ Clock.prototype.renderPips = function () {
         var multiplierY = Math.cos(hourRatio);
 
         var pip = this.two.makeLine(
-            this.x - 130 * multiplierX, this.y - 130 * multiplierY,
-            this.x - 120 * multiplierX, this.y - 120 * multiplierY
+            this.x - 80 * multiplierX, this.y - 80 * multiplierY,
+            this.x - 75 * multiplierX, this.y - 75 * multiplierY
         );
         pip.stroke = '#fff';
-        pip.linewidth = 10;
+        pip.linewidth = 5;
         pip.cap = 'round';
         this.group.add(pip);
     }
@@ -72,10 +72,10 @@ Clock.prototype.setCurrent = function () {
 };
 
 Clock.prototype.render = function () {
-    var outer = this.two.makeCircle(this.x, this.y, 150);
+    var outer = this.two.makeCircle(this.x, this.y, 90);
     this.group.add(outer);
 
-    var inner = this.two.makeCircle(this.x, this.y, 140);
+    var inner = this.two.makeCircle(this.x, this.y, 85);
     this.group.add(inner);
     inner.fill = '#1f1f1f';
 
