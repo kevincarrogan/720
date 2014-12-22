@@ -77,7 +77,7 @@ Clock.prototype.render = function () {
 
     var inner = this.two.makeCircle(this.x, this.y, 85);
     this.group.add(inner);
-    inner.fill = '#1f1f1f';
+    inner.fill = '#000';
 
     var minuteHand = this.renderHand(this.getMinuteHandPos.bind(this));
     this.group.add(minuteHand);
