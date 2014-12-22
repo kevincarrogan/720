@@ -64,11 +64,11 @@ Clock.prototype.renderPips = function () {
 };
 
 Clock.prototype.unsetCurrent = function () {
-    new TWEEN.Tween(this.group).to({opacity: 0.2}, 500).start();
+    new TWEEN.Tween(this.group).to({opacity: 0.2, scale: 0.35}, 400).start();
 };
 
 Clock.prototype.setCurrent = function () {
-    new TWEEN.Tween(this.group).to({opacity: 1}, 500).start();
+    new TWEEN.Tween(this.group).to({opacity: 1, scale: 1}, 400).start();
 };
 
 Clock.prototype.render = function () {
@@ -88,6 +88,9 @@ Clock.prototype.render = function () {
     this.renderPips();
 
     this.group.opacity = 0.2;
+    this.group.center();
+    this.group.translation.set(this.x, this.y);
+    this.group.scale = 0.35;
 };
 
 var Scene = function (el) {
@@ -128,8 +131,7 @@ Scene.prototype.centerOnClock = function (clock) {
     clock.setCurrent();
 
     new TWEEN.Tween(scene.translation)
-            .easing(TWEEN.Easing.Elastic.Out)
-            .to({x: centerX - clock.x, y: centerY - clock.y}, 1000)
+            .to({x: centerX - clock.x, y: centerY - clock.y}, 400)
             .start();
 
     this.currentClock = clock;
