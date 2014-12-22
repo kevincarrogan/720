@@ -64,7 +64,7 @@ Clock.prototype.renderPips = function () {
 };
 
 Clock.prototype.unsetCurrent = function () {
-    new TWEEN.Tween(this.group).to({opacity: 0.2, scale: 0.35}, 400).start();
+    new TWEEN.Tween(this.group).to({opacity: 0.3, scale: 0.35}, 400).start();
 };
 
 Clock.prototype.setCurrent = function () {
@@ -87,7 +87,7 @@ Clock.prototype.render = function () {
 
     this.renderPips();
 
-    this.group.opacity = 0.2;
+    this.group.opacity = 0.3;
     this.group.center();
     this.group.translation.set(this.x, this.y);
     this.group.scale = 0.35;
