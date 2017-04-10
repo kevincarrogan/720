@@ -2,4 +2,4 @@
 
 A stopped clock is right twice a day.
 
-http://seventwenty.divshot.io/
+https://720-vxurksbzdj.now.sh
