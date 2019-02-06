@@ -16,15 +16,14 @@ class Scene {
             width: el.clientWidth
         });
 
-        this.timeMap = {};
-
         this.clocks = [];
         for (let hour = 0; hour < 12; hour++) {
+            let clocksByMinute = [];
             for (let minute = 0; minute < 60; minute++) {
                 let clock = new Clock(this.two, minute, hour, hour, minute)
-                this.clocks.push(clock);
-                this.timeMap[(hour % 12) + ':' + minute] = clock;
+                clocksByMinute.push(clock);
             }
+            this.clocks.push(clocksByMinute);
         }
 
         this.updateTime();
@@ -57,7 +56,7 @@ class Scene {
     }
 
     setTime(hour, minutes) {
-        let clock = this.timeMap[hour + ':' + minutes];
+        let clock = this.clocks[hour][minutes];
 
         if (clock !== this.currentClock) {
             this.centerOnClock(clock);
@@ -69,9 +68,11 @@ class Scene {
 
         this.two.appendTo(this.el);
 
-        for (let i = 0; i < this.clocks.length; i++) {
-            this.clocks[i].render();
-        }
+        this.clocks.forEach(clocksByHour => {
+            clocksByHour.forEach(clock => {
+                clock.render();
+            });
+        });
 
         this.two.bind('update', function () { TWEEN.update(); }).play();
 
