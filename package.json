@@ -1,0 +1,28 @@
+{
+  "name": "720",
+  "version": "1.0.0",
+  "description": "A stopped clock is right twice a day.",
+  "private": "true",
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.3.0",
+    "lodash": "^4.17.11",
+    "two.js": "^0.7.0-beta.3",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevincarrogan/720.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevincarrogan/720/issues"
+  },
+  "homepage": "https://github.com/kevincarrogan/720#readme"
+}
