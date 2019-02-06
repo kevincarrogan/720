@@ -1,8 +1,17 @@
+// @flow
+
 import TWEEN from '@tweenjs/tween.js';
 
 class Clock {
 
-    constructor(two, x, y, hour, minute) {
+    two: any;
+    x: number;
+    y: number;
+    hour: number;
+    minute: number;
+    group: any;
+
+    constructor(two: any, x: number, y: number, hour: number, minute: number) {
         this.x = x * 165;
         this.y = y * 165;
         this.two = two;
@@ -12,11 +21,11 @@ class Clock {
         this.group = two.makeGroup();
     }
 
-    getRatio(intervals, val) {
+    getRatio(intervals: number, val: number): number {
         return ((2 * Math.PI) / intervals) * val;
     }
 
-    getHandPos(intervals, val, length) {
+    getHandPos(intervals: number, val: number, length: number): {x: number, y: number} {
         let ratio = this.getRatio(intervals, val);
         let multiplierX = Math.sin(ratio);
         let multiplierY = Math.cos(ratio);
@@ -37,7 +46,7 @@ class Clock {
         return this.getHandPos(12, hour, 40);
     }
 
-    renderHand(posFunc) {
+    renderHand(posFunc: () => {x: number, y: number}): any {
         let handDimensions = posFunc();
         let hand = this.two.makeLine(
             this.x, this.y,
