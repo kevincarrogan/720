@@ -72,7 +72,7 @@ class Scene {
             });
         });
 
-        this.two.bind('update', function () { TWEEN.update(); }).play();
+        this.two.bind('update', () => { TWEEN.update(); }).play();
 
         let resize = _.debounce(() => {
             this.two.height = this.el.clientHeight;
