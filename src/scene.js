@@ -64,8 +64,6 @@ class Scene {
     }
 
     render() {
-        let self = this;
-
         this.two.appendTo(this.el);
 
         this.clocks.forEach(clocksByHour => {
@@ -76,11 +74,11 @@ class Scene {
 
         this.two.bind('update', function () { TWEEN.update(); }).play();
 
-        let resize = _.debounce(function () {
-            self.two.height = self.el.clientHeight;
-            self.two.width = self.el.clientWidth;
-            if (self.currentClock) {
-                self.centerOnClock(self.currentClock);
+        let resize = _.debounce(() => {
+            this.two.height = this.el.clientHeight;
+            this.two.width = this.el.clientWidth;
+            if (this.currentClock) {
+                this.centerOnClock(this.currentClock);
             }
         }, 100);
 
