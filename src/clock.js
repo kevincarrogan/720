@@ -2,6 +2,11 @@
 
 import TWEEN from '@tweenjs/tween.js';
 
+type Coordinates = {
+    x: number,
+    y: number,
+};
+
 class Clock {
 
     two: any;
@@ -25,7 +30,7 @@ class Clock {
         return ((2 * Math.PI) / intervals) * val;
     }
 
-    getHandPos(intervals: number, val: number, length: number): {x: number, y: number} {
+    getHandPos(intervals: number, val: number, length: number): Coordinates {
         let ratio = this.getRatio(intervals, val);
         let multiplierX = Math.sin(ratio);
         let multiplierY = Math.cos(ratio);
@@ -46,7 +51,7 @@ class Clock {
         return this.getHandPos(12, hour, 40);
     }
 
-    renderHand(posFunc: () => {x: number, y: number}): any {
+    renderHand(posFunc: () => Coordinates): any {
         let handDimensions = posFunc();
         let hand = this.two.makeLine(
             this.x, this.y,
