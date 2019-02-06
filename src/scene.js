@@ -7,7 +7,7 @@ import Clock from './clock';
 class Scene {
 
     constructor(el) {
-        var currentDate = new Date();
+        let currentDate = new Date();
 
         this.el = el;
 
@@ -19,9 +19,9 @@ class Scene {
         this.timeMap = {};
 
         this.clocks = [];
-        for (var hour = 0; hour < 12; hour++) {
-            for (var minute = 0; minute < 60; minute++) {
-                var clock = new Clock(this.two, minute, hour, hour, minute)
+        for (let hour = 0; hour < 12; hour++) {
+            for (let minute = 0; minute < 60; minute++) {
+                let clock = new Clock(this.two, minute, hour, hour, minute)
                 this.clocks.push(clock);
                 this.timeMap[(hour % 12) + ':' + minute] = clock;
             }
@@ -33,9 +33,9 @@ class Scene {
     }
 
     centerOnClock(clock) {
-        var centerX = this.two.width / 2;
-        var centerY = this.two.height / 2;
-        var scene = this.two.scene;
+        let centerX = this.two.width / 2;
+        let centerY = this.two.height / 2;
+        let scene = this.two.scene;
 
         if (this.currentClock) {
             this.currentClock.unsetCurrent();
@@ -51,13 +51,13 @@ class Scene {
     }
 
     updateTime() {
-        var currentDate = new Date();
+        let currentDate = new Date();
         
         this.setTime((currentDate.getHours() % 12), currentDate.getMinutes());
     }
 
     setTime(hour, minutes) {
-        var clock = this.timeMap[hour + ':' + minutes];
+        let clock = this.timeMap[hour + ':' + minutes];
 
         if (clock !== this.currentClock) {
             this.centerOnClock(clock);
@@ -65,17 +65,17 @@ class Scene {
     }
 
     render() {
-        var self = this;
+        let self = this;
 
         this.two.appendTo(this.el);
 
-        for (var i = 0; i < this.clocks.length; i++) {
+        for (let i = 0; i < this.clocks.length; i++) {
             this.clocks[i].render();
         }
 
         this.two.bind('update', function () { TWEEN.update(); }).play();
 
-        var resize = _.debounce(function () {
+        let resize = _.debounce(function () {
             self.two.height = self.el.clientHeight;
             self.two.width = self.el.clientWidth;
             if (self.currentClock) {
