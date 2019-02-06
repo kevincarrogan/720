@@ -17,9 +17,9 @@ class Clock {
     }
 
     getHandPos(intervals, val, length) {
-        var ratio = this.getRatio(intervals, val);
-        var multiplierX = Math.sin(ratio);
-        var multiplierY = Math.cos(ratio);
+        let ratio = this.getRatio(intervals, val);
+        let multiplierX = Math.sin(ratio);
+        let multiplierY = Math.cos(ratio);
 
         return {
             x: (multiplierX * length + this.x),
@@ -32,14 +32,14 @@ class Clock {
     }
 
     getHourHandPos() {
-        var hour = this.hour + (this.minute / 60);
+        let hour = this.hour + (this.minute / 60);
 
         return this.getHandPos(12, hour, 40);
     }
 
     renderHand(posFunc) {
-        var handDimensions = posFunc();
-        var hand = this.two.makeLine(
+        let handDimensions = posFunc();
+        let hand = this.two.makeLine(
             this.x, this.y,
             handDimensions.x, handDimensions.y
         );
@@ -51,12 +51,12 @@ class Clock {
     }
 
     renderPips() {
-        for (var i = 0; i < 12; i++) {
-            var hourRatio = this.getRatio(12, i);
-            var multiplierX = Math.sin(hourRatio);
-            var multiplierY = Math.cos(hourRatio);
+        for (let i = 0; i < 12; i++) {
+            let hourRatio = this.getRatio(12, i);
+            let multiplierX = Math.sin(hourRatio);
+            let multiplierY = Math.cos(hourRatio);
 
-            var pip = this.two.makeLine(
+            let pip = this.two.makeLine(
                 this.x - 80 * multiplierX, this.y - 80 * multiplierY,
                 this.x - 75 * multiplierX, this.y - 75 * multiplierY
             );
@@ -76,17 +76,17 @@ class Clock {
     }
 
     render() {
-        var outer = this.two.makeCircle(this.x, this.y, 90);
+        let outer = this.two.makeCircle(this.x, this.y, 90);
         this.group.add(outer);
 
-        var inner = this.two.makeCircle(this.x, this.y, 85);
+        let inner = this.two.makeCircle(this.x, this.y, 85);
         this.group.add(inner);
         inner.fill = '#000';
 
-        var minuteHand = this.renderHand(this.getMinuteHandPos.bind(this));
+        let minuteHand = this.renderHand(this.getMinuteHandPos.bind(this));
         this.group.add(minuteHand);
 
-        var hourHand = this.renderHand(this.getHourHandPos.bind(this));
+        let hourHand = this.renderHand(this.getHourHandPos.bind(this));
         this.group.add(hourHand);
 
         this.renderPips();
