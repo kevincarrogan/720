@@ -41,11 +41,11 @@ class Clock {
         };
     }
 
-    getMinuteHandPos() {
+    getMinuteHandPos(): Coordinates {
         return this.getHandPos(60, this.minute, 65);
     }
 
-    getHourHandPos() {
+    getHourHandPos(): Coordinates {
         let hour = this.hour + (this.minute / 60);
 
         return this.getHandPos(12, hour, 40);
