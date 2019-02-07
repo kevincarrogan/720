@@ -1,12 +1,21 @@
+// @flow
+
 import Two from 'two.js';
 import TWEEN from '@tweenjs/tween.js';
 import _ from 'lodash';
 
 import Clock from './clock';
 
+type ClocksArray = Clock[];
+
 class Scene {
 
-    constructor(el) {
+    el: Element;
+    two: any;
+    clocks: Array<ClocksArray>;
+    currentClock: Clock;
+
+    constructor(el: Element) {
         let currentDate = new Date();
 
         this.el = el;
@@ -31,7 +40,7 @@ class Scene {
         setInterval(this.updateTime.bind(this), 500);        
     }
 
-    centerOnClock(clock) {
+    centerOnClock(clock: Clock) {
         let centerX = this.two.width / 2;
         let centerY = this.two.height / 2;
         let scene = this.two.scene;
@@ -55,7 +64,7 @@ class Scene {
         this.setTime((currentDate.getHours() % 12), currentDate.getMinutes());
     }
 
-    setTime(hour, minutes) {
+    setTime(hour: number, minutes: number) {
         let clock = this.clocks[hour][minutes];
 
         if (clock !== this.currentClock) {
