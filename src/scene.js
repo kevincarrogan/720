@@ -6,13 +6,11 @@ import _ from 'lodash';
 
 import Clock from './clock';
 
-type ClocksArray = Clock[];
-
 class Scene {
 
     el: Element;
     two: any;
-    clocks: Array<ClocksArray>;
+    clocks: Array<Clock[]>;
     currentClock: Clock;
 
     constructor(el: Element) {
